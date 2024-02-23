@@ -10,6 +10,12 @@ from networks import make_ba_graph
 import random
 
 class BA():
+  """ Class for Prisoner's Dilemma game using a Barabasi-Albert network
+  
+  Attributes:
+    ba: Graph that is a Barabasi Albert network
+    prisoner_list: A dictionary mapping the int keys that represent nodes to the values that are the individual class.
+      format is {1: individual(), 2: individual()} """
     
     def __init__(self, n,k ):
         """
@@ -74,6 +80,14 @@ class BA():
       
 
     def nowak_may(self, node):
+      """Uses the Nowak & May Updating Rule
+      1. Look at all the neighbors of a prisoner
+      2. Choose the neighbor who had the highest payoff in the last round
+      3. Prisoner adopts the neighbor's strategy in the last round for this round
+
+      args:
+        node: An integer that represents the node we're working with in the gram
+         """
       prisoner = self.prisoner_list[node]
       neighbors = list(nx.all_neighbors(self.ba, node))
       highest_payoff = prisoner.get_previous_payoff()
@@ -86,8 +100,16 @@ class BA():
       
       prisoner.update_strategy(strategy)
     
-    def santos_pacheco(self, prisoner):
-      neighbors = list(nx.all_neighbors(self.ba, prisoner))
+    def santos_pacheco(self, node):
+      """Uses the Santos-Pacheco updating rule
+      1. Out of their neighbors, randomly chooses one neighbor
+      2. If their neighbor's payoff last round was higher than prisoner's payoff, they have a (neighbor_payoff - prisoner_payoff)/(neighbor_payoff - prisoner_payoff) percentage of adopting the neighbor's strategy. 
+  
+      args:
+        node: integer that represents the node the prisoner is
+      """
+      neighbors = list(nx.all_neighbors(self.ba, node))
+      prisoner = self.prisoner_list[node]
       prisoner_payoff = prisoner.get_previous_payoff()
       neighbor = random.choice(neighbors)
 
