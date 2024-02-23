@@ -3,46 +3,91 @@ import random
 class Prisoner:
     def __init__(self, strat=None):
         """
-        Implementation of the Prisoner object in the Prisoner's Dilemma Game
+        Implementation of the Prisoner object in the Prisoner's Dilemma Game.
+
+        Args:
+            - strat (str): The prisoner's initial strategy. 'C' represents cooperation, 'D' represents defection.
 
         Attributes:
-            strat: a string (C or D) representing the Prisoner's initial strategy
+            - TRPS (dict):  The payoffs for different combinations of strategies.
+                            Keys represent the opponent's strategy, and values represent the corresponding payoff.
+                            'T': Temptation, 'R': Reward, 'P': Punishment, 'S': Sucker.
+            - strategy (str): The prisoner's strategy. 'C' represents cooperation, 'D' represents defection.
+            - strategy_history (list of str): The prisoner's past strategies in the previous rounds.
+            - payoff (int): The value of the outcome of the current round.
+            - payoff_history (list of int): The prisoner's past payoffs in the previous rounds.
         """
+
+        self.TRPS = {'T': 1, 'R': 2, 'P': 3, 'S': 4}
         possible_strats = ['C', 'D']
         self.strategy = strat
         
         if strat is None:
             self.strategy = random.choice(possible_strats)
-        
-        self.TRPS = {'T': 1, 'R': 2, 'P': 3, 'S': 4}
+
         self.strategy_history = [self.strategy]
         self.payoff = 0
         self.payoff_history = []
 
     ### STRATEGY ###
-    def set_strategy(self, x):
-        self.strategy = x
+    def set_strategy(self, strat):
+        """
+        Sets the strategy of the prisoner.
+
+        Args:
+            strat (str): The new strategy to be set. 'C' represents cooperation,
+                         'D' represents defection.
+        """
+        self.strategy = strat
 
     def get_strategy(self):
         """
-        Gets the Prisoner's current strategy
-
+        Gets the strategy of the prisoner.
+        
         Returns:
-            A string (C or D) representing the Prisoner's current strategy
+            strategy (str): The prisoner's strategy. 'C' represents cooperation, 'D' represents defection.
         """
         return self.strategy
     
-    def add_to_strategy_history(self, x):
-        self.strategy_history.append(x)
+    def add_to_strategy_history(self, strat):
+        """
+        Adds a value to the strategy history list of the prisoner.
+        
+        Args:
+            strat (str): The value to be added to the strategy history list.
+        """
+        self.strategy_history.append(strat)
     
     ### PAYOFF ###
     def get_payoff(self):
+        """
+        Gets the payoff of the current round.
+        
+        Returns:
+            payoff (int): The value of the outcome of the current round.
+        """
         return self.payoff
     
     def get_previous_payoff(self):
+        """
+        Gets the payoff of the previous round by retreiving the last element of the payoff history list.
+        
+        Returns:
+            The payoff of the previous round.
+        """
         return self.payoff_history[-1]
 
     def update_payoff(self, j):
+        """
+        Gets the payoff of the previous round by retreiving the last element of the payoff history list.
+        Returns:
+
+        Args:
+            j: The 
+
+        Returns:
+            The payoff of the previous round.
+        """
         if self.strategy == 'D' and j.get_strategy() == 'C':
             self.payoff += self.TRPS['T']
         elif self.strategy == 'D' and j.get_strategy() == 'D':
