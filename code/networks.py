@@ -2,6 +2,9 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
 import seaborn as sns
+import random
+from typing import *
+
 
 def adjacent_edges(nodes, k):
     """
@@ -96,3 +99,59 @@ def make_ws_graph(n, k, p):
     ws = make_ring_lattice(n, k)
     rewire(ws, p)
     return ws
+
+
+
+
+#BA Graph Functions
+
+
+def make_ba_graph(num_nodes: int, num_edges_per_node: int,
+                          seed: Optional[int] = None):
+    """
+    Construct a Barabasi-Albert graph.
+
+    Args:
+      num_nodes: an int, the number of nodes in the resulting graph
+      num_edges_per_node: an int, the number of edges each new node gets
+      seed: an int, a random seed for testing purposes, or None to not set
+
+    Returns:
+      a nx.Graph representing a Barabasi Albert graph with the given parameters
+    """
+    if seed is not None:
+        random.seed(seed)
+
+    G = nx.empty_graph(num_edges_per_node)
+    targets = set(range(num_edges_per_node))
+    repeated_nodes = []
+
+    for source in range(num_edges_per_node, num_nodes):
+
+        G.add_edges_from(zip([source]*num_edges_per_node, targets))
+
+        repeated_nodes.extend(targets)
+        repeated_nodes.extend([source] * num_edges_per_node)
+
+        targets = random_subset(repeated_nodes, num_edges_per_node)
+
+    return G
+
+
+def random_subset(repeated_nodes: List, num_to_select: int):
+    """
+    Select a random subset of nodes without repeats
+
+    Args:
+      repeated_nodes: list of nodes to randomly select from
+      num_to_select: an int, the number of nodes to select
+
+    Returns:
+      A set of randomly selected elements of repeated_nodes, such that the
+        length of the resulting set == num_to_select
+    """
+    targets = set()
+    while len(targets) < num_to_select:
+        node = random.choice(repeated_nodes)
+        targets.add(node)
+    return targets
