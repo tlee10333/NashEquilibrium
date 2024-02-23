@@ -18,7 +18,7 @@ class Prisoner:
             - payoff_history (list of int): The prisoner's past payoffs in the previous rounds.
         """
 
-        self.TRPS = {'T': 1, 'R': 2, 'P': 3, 'S': 4}
+        self.TRPS = {'T': 4, 'R': 3, 'P': 2, 'S': 1}
         possible_strats = ['C', 'D']
         self.strategy = strat
         

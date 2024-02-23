@@ -5,7 +5,7 @@ import seaborn as sns
 import random
 from typing import *
 
-
+#Functions to create & run WS & NA Networks
 def adjacent_edges(nodes, k):
     """
     Yields edges between each node and `halfk` neighbors.

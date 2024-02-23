@@ -6,7 +6,6 @@ import seaborn as sns
 import random
 from Prisoner import *
 
-
 class Network():
     '''
 
@@ -15,11 +14,8 @@ class Network():
 
     Attributes:
       ws: Graph that keeps track of the WS network
-      prisoner_list: A dictionary which correlates each node in the ws to an individual Class
-  
-    
+      prisoner_list: A dictionary which correlates each node in the ws to an individual Clas
     '''
-    
     def __init__(self, n,k,p=0.1, graph_type="ws") -> None:
       """
       Makes a Watts-Strogatz graph.
@@ -29,7 +25,6 @@ class Network():
         k: int, degree of each node
         p: double, probability of rewiring an edge
       """
-
       if graph_type == "ws":
 
         self.G = make_ws_graph(n,k,p)
@@ -37,7 +32,6 @@ class Network():
         self.G = make_ba_graph(n, k)
 
       self.prisoner_list = {}
-
 
       #50/50 of C & D when initally initalized
       #prisoner_list format {1: individual, 2: individual}
@@ -47,36 +41,37 @@ class Network():
         else:
           self.prisoner_list[node] = Prisoner("D")
             
-    
-
     def get_neighbors(self, node):
+      """Returns a list of neighbors of a specified individual
+      
+      args:
+        node: int that represents the number of the individual we're interested in
+      
+      returns:
+        A list of int which represent the number IDs of the neighbors """
       return list(nx.all_neighbors(self.G, node))
 
-
-
     def draw(self, labels=False):
-      '''Draws the image of the WS network
+      '''Draws the image of the WS network. Color coded so Red represents defectors and blue represents cooperators
 
       Args:
         labels: boolean, determines whether the graph will have labels of each node
-
-      
       '''
       fig, ax = plt.subplots()
       pos = nx.spring_layout(self.G)
 
       def assign_color(node):
+        '''A private function that basically determines the color of the prisoner'''
         return 'red' if self.prisoner_list[node].get_strategy() == "D" else 'blue'
 
       node_colors = [assign_color(node) for node in self.G.nodes]
-
-
-
-
       nx.draw_networkx(self.G, node_color=node_colors, node_size=5, font_size=5, with_labels=False, pos=pos)
       plt.show()
 
     def round(self):
+      '''Runs one round of PDG
+      
+      For each prisoner, they play PDG will all their neighbors using their current strategy for the entire round. After reach game with it's neighbor, their payoff value will be adjusted according to which payoff they got. At the end, their total payoff value determines how well they did that round against their opponents'''
 
       for node, prisoner in self.prisoner_list.items():
         neighbors = list(nx.all_neighbors(self.G, node))
@@ -93,7 +88,10 @@ class Network():
           
 
     def update(self, rule=0):
-      """Prepare for next round & choose strategy"""
+      """Prepare for next round & choose strategy using either nowak-may or santos-pacheco updating rule
+      
+      args:
+        rule: determines the type of updating rule. 0 means Nowak-may and 1 means santos-pacheco"""
       
       for node in self.prisoner_list:
         self.prisoner_list[node].reset_payoff()
@@ -107,6 +105,13 @@ class Network():
       
 
     def nowak_may(self, node):
+      """Uses the Nowak & May Updating Rule
+      1. Look at all the neighbors of a prisoner
+      2. Choose the neighbor who had the highest payoff in the last round
+      3. Prisoner adopts the neighbor's strategy in the last round for this round
+      args:
+        node: An integer that represents the node we're working with in the gram
+      """
       prisoner = self.prisoner_list[node]
       neighbors = list(nx.all_neighbors(self.G, node))
       highest_payoff = prisoner.get_previous_payoff()
@@ -120,6 +125,13 @@ class Network():
       prisoner.set_strategy(strategy)
     
     def santos_pacheco(self, node):
+      """Uses the Santos-Pacheco updating rule
+      1. Out of their neighbors, randomly chooses one neighbor
+      2. If their neighbor's payoff last round was higher than prisoner's payoff, they have a (neighbor_payoff - prisoner_payoff)/(neighbor_payoff - prisoner_payoff) percentage of adopting the neighbor's strategy. 
+  
+      args:
+        node: integer that represents the node the prisoner is
+      """
       prisoner = self.prisoner_list[node]
 
       neighbors = list(nx.all_neighbors(self.G, node))
