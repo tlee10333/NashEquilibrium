@@ -3,7 +3,7 @@ import random
 class Prisoner:
     def __init__(self, strat=None):
         """
-        Implementation of the Prisoner object in the Prisoner's Dilemma Game.
+        Implementation of the Prisoner object in the Prisoner's Dilemma Game (PDG).
 
         Args:
             - strat (str): The prisoner's initial strategy. 'C' represents cooperation, 'D' represents defection.
@@ -18,7 +18,7 @@ class Prisoner:
             - payoff_history (list of int): The prisoner's past payoffs in the previous rounds.
         """
 
-        self.TRPS = {'T': 1, 'R': 2, 'P': 3, 'S': 4}
+        self.TRPS = {'T': 4, 'R': 3, 'P': 2, 'S': 1}
         possible_strats = ['C', 'D']
         self.strategy = strat
         
@@ -29,7 +29,7 @@ class Prisoner:
         self.payoff = 0
         self.payoff_history = []
 
-    ### STRATEGY ###
+    ##### STRATEGY #####
     def set_strategy(self, strat):
         """
         Sets the strategy of the prisoner.
@@ -58,7 +58,7 @@ class Prisoner:
         """
         self.strategy_history.append(strat)
     
-    ### PAYOFF ###
+    ##### PAYOFF #####
     def get_payoff(self):
         """
         Gets the payoff of the current round.
@@ -77,35 +77,45 @@ class Prisoner:
         """
         return self.payoff_history[-1]
 
-    def update_payoff(self, j):
+    def update_payoff(self, neighbor):
         """
-        Gets the payoff of the previous round by retreiving the last element of the payoff history list.
-        Returns:
+        Updates the prisoner's payoff depending on the neighboring prisoner's strategy.
 
         Args:
-            j: The 
+            neighbor: The neighboring prisoner, who is the other player in the current
+                        2-player game of the Prisoner's Dilemma.
 
-        Returns:
-            The payoff of the previous round.
         """
-        if self.strategy == 'D' and j.get_strategy() == 'C':
+        if self.strategy == 'D' and neighbor.get_strategy() == 'C':
             self.payoff += self.TRPS['T']
-        elif self.strategy == 'D' and j.get_strategy() == 'D':
+        elif self.strategy == 'D' and neighbor.get_strategy() == 'D':
             self.payoff += self.TRPS['P']
-        elif self.strategy == 'C' and j.get_strategy() == 'C':
+        elif self.strategy == 'C' and neighbor.get_strategy() == 'C':
             self.payoff += self.TRPS['R']
         else:
             self.payoff += self.TRPS['S']
 
     def reset_payoff(self):
+        """
+        Resets the prisoner's payoff to 0 for the next round.
+        """
         self.payoff = 0
     
     def add_to_payoff_history(self):
+        """
+        Adds a value to the payoff history list of the prisoner.
+        """
         self.payoff_history.append(self.payoff)
 
-    ### OTHER ###
-
+    ##### OTHER #####
     def local_frequency(self):
+        """
+        Calculates the local frequency of cooperation in the prisoner's strategy history.
+        This method computes the ratio of rounds in which the prisoner cooperated to the total number of rounds.
+        
+        Returns:
+            coop_rate (float): The local frequency of cooperation, represented as a decimal between 0 and 1.
+        """
         target = 'C'
         num_coop_rounds = [i for i in self.strategy_history if i==target]
         num_rounds_total = len(self.strategy_history)
