@@ -5,6 +5,7 @@ class Prisoner:
         strategies = ['C', 'D']
         self.strategy = random.choice(strategies)
         self.TRSP = {'T': 1, 'R': 2, 'P': 3, 'S': 4}
+        self.strategy_history = [self.strategy]
 
     def get_strategy(self):
         return self.strategy
@@ -28,4 +29,7 @@ class Prisoner:
             self.TRSP['R'] += 1
         else:
             self.TRSP['S'] += 1
-          
+
+    def add_to_history(self, x):
+        self.strategy_history.append(x)
+        
