@@ -49,6 +49,14 @@ class Prisoner:
         """
         return self.strategy
     
+    def get_previous_strategy(self):
+        """
+        Gets the previous strategy of the prisoner.
+        
+        Returns:
+            strategy (str): The prisoner's strategy. 'C' represents cooperation, 'D' represents defection.
+        """
+        return self.strategy_history[-1]
     def add_to_strategy_history(self, strat):
         """
         Adds a value to the strategy history list of the prisoner.

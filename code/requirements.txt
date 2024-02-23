@@ -1,6 +1,5 @@
 matplotlib
 networkx
 seaborn
-utils
 numpy
 
