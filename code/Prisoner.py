@@ -1,7 +1,8 @@
 import random
 
+
 class Prisoner:
-    def __init__(self, strat=None):
+    def __init__(self, strat=None, t=0.9, r=0.4, p=0, s=0):
         """
         Implementation of the Prisoner object in the Prisoner's Dilemma Game (PDG).
 
@@ -18,16 +19,18 @@ class Prisoner:
             - payoff_history (list of int): The prisoner's past payoffs in the previous rounds.
         """
 
-        self.TRPS = {'T': 4, 'R': 3, 'P': 2, 'S': 1}
+        self.TRPS = {'T': t, 'R': r, 'P': p, 'S': s}
         possible_strats = ['C', 'D']
         self.strategy = strat
-        
+
         if strat is None:
             self.strategy = random.choice(possible_strats)
 
         self.strategy_history = [self.strategy]
         self.payoff = 0
         self.payoff_history = []
+
+        self.nash_paired =[]
 
     ##### STRATEGY #####
     def set_strategy(self, strat):
@@ -43,43 +46,44 @@ class Prisoner:
     def get_strategy(self):
         """
         Gets the strategy of the prisoner.
-        
+
         Returns:
             strategy (str): The prisoner's strategy. 'C' represents cooperation, 'D' represents defection.
         """
         return self.strategy
-    
+
     def get_previous_strategy(self):
         """
         Gets the previous strategy of the prisoner.
-        
+
         Returns:
             strategy (str): The prisoner's strategy. 'C' represents cooperation, 'D' represents defection.
         """
         return self.strategy_history[-1]
+
     def add_to_strategy_history(self, strat):
         """
         Adds a value to the strategy history list of the prisoner.
-        
+
         Args:
             strat (str): The value to be added to the strategy history list.
         """
         self.strategy_history.append(strat)
-    
+
     ##### PAYOFF #####
     def get_payoff(self):
         """
         Gets the payoff of the current round.
-        
+
         Returns:
             payoff (int): The value of the outcome of the current round.
         """
         return self.payoff
-    
+
     def get_previous_payoff(self):
         """
         Gets the payoff of the previous round by retreiving the last element of the payoff history list.
-        
+
         Returns:
             The payoff of the previous round.
         """
@@ -108,7 +112,7 @@ class Prisoner:
         Resets the prisoner's payoff to 0 for the next round.
         """
         self.payoff = 0
-    
+
     def add_to_payoff_history(self):
         """
         Adds a value to the payoff history list of the prisoner.
@@ -120,12 +124,22 @@ class Prisoner:
         """
         Calculates the local frequency of cooperation in the prisoner's strategy history.
         This method computes the ratio of rounds in which the prisoner cooperated to the total number of rounds.
-        
+
         Returns:
             coop_rate (float): The local frequency of cooperation, represented as a decimal between 0 and 1.
         """
         target = 'C'
-        num_coop_rounds = [i for i in self.strategy_history if i==target]
+        num_coop_rounds = 0
+
+        for i in self.strategy_history:
+            if i == target:
+                num_coop_rounds += 1
         num_rounds_total = len(self.strategy_history)
         coop_rate = num_coop_rounds / num_rounds_total
         return coop_rate
+    
+    def clear_nash_pair(self):
+        self.nash_paired = []
+
+    def add_nash_pair(self, node):
+        self.nash_paired.append(node)
