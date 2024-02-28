@@ -1,4 +1,4 @@
-from networks import make_ws_graph, make_ba_graph
+from networks import make_ws_graph, make_ba_graph, flip
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
@@ -18,18 +18,20 @@ class Network():
       prisoner_list: A dictionary which correlates each node in the ws to an individual Clas
     '''
 
-    def __init__(self, n, k, p=0.1, graph_type="ws") -> None:
+    def __init__(self, n, k, prob=0.1, graph_type="ws", t=4, r=3, p=2, s=1) -> None:
         """
         Makes a Watts-Strogatz graph.
 
         Args:
           n: int, number of nodes
           k: int, degree of each node
-          p: double, probability of rewiring an edge
+          prob: double, probability of rewiring an edge
         """
+
+        self.n = n
         if graph_type == "ws":
 
-            self.G = make_ws_graph(n, k, p)
+            self.G = make_ws_graph(n, k, prob)
         elif graph_type == "ba":
             self.G = make_ba_graph(n, k)
 
@@ -38,10 +40,13 @@ class Network():
         # 50/50 of C & D when initally initalized
         # prisoner_list format {1: individual, 2: individual}
         for node in list(self.G.nodes()):
-            if node <= n/2:
-                self.prisoner_list[node] = Prisoner("C")
+
+            prob = flip(0.5)
+            if prob:
+                # if node < n/2:
+                self.prisoner_list[node] = Prisoner("C", t=t, r=r, p=p, s=s)
             else:
-                self.prisoner_list[node] = Prisoner("D")
+                self.prisoner_list[node] = Prisoner("D", t=t, r=r, p=p, s=s)
 
     def get_neighbors(self, node):
         """Returns a list of neighbors of a specified individual
@@ -59,7 +64,9 @@ class Network():
         Args:
           labels: boolean, determines whether the graph will have labels of each node
         '''
+
         fig, ax = plt.subplots()
+
         pos = nx.spring_layout(self.G)
 
         def assign_color(node):
@@ -69,7 +76,25 @@ class Network():
         node_colors = [assign_color(node) for node in self.G.nodes]
         nx.draw_networkx(self.G, node_color=node_colors,
                          node_size=5, font_size=5, with_labels=False, pos=pos)
+
         plt.show()
+
+    def subplot_draw(self):
+        '''Draws the image of the WS network. Color coded so Red represents defectors and blue represents cooperators
+
+        Args:
+          labels: boolean, determines whether the graph will have labels of each node
+        '''
+
+        pos = nx.spring_layout(self.G)
+
+        def assign_color(node):
+            '''A private function that basically determines the color of the prisoner'''
+            return 'red' if self.prisoner_list[node].get_strategy() == "D" else 'blue'
+
+        node_colors = [assign_color(node) for node in self.G.nodes]
+        nx.draw_networkx(self.G, node_color=node_colors,
+                         node_size=5, font_size=5, with_labels=False, pos=pos)
 
     def round(self):
         '''Runs one round of PDG
@@ -93,7 +118,7 @@ class Network():
                     neighbor.TRPS["R"] - neighbor.TRPS["T"] + neighbor.TRPS["P"] - neighbor.TRPS["S"]) * neighbor.local_frequency())
 
                 if (neighbor_delta_n > 0 and prisoner_delta_n > 0) or (neighbor_delta_n < 0 and prisoner_delta_n < 0):
-                    prisoner.add_nash_pair(neighbor)
+                    prisoner.add_nash_pair(j)  # Add neighbor's node
 
             prisoner.add_to_strategy_history(prisoner_strategy)
             prisoner.add_to_payoff_history()
