@@ -27,4 +27,7 @@ Our team reproduced the experiment examining the conditions under which a system
 ## 4) Results from the replication and possibly preliminary results from the extension. Or if you don't have results, sketch what the results from these experiments might look like, possibly using a cartoon of a graphical result.
 
 
-![Figure 1](https://github.com/tlee10333/NashEquilibrium/assets/47285707/c051c0fe-699e-4b0b-a5b5-4e04b4cbc3b0)
+![Figure 1](https://github.com/tlee10333/NashEquilibrium/assets/47285707/c051c0fe-699e-4b0b-a5b5-4e04b4cbc3b0 "Figure 1")
+![Figure 2](https://github.com/tlee10333/NashEquilibrium/assets/47285707/b65cd2cc-dd35-4b79-a014-a63a1388c5b5 "Figure 2")
+
+
