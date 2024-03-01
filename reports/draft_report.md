@@ -22,7 +22,9 @@ They used Local Nash equilibrium to judge whether a gaming structured population
 
 ## 3) A description of the experiment from these papers that you are replicating and the extensions or variations of those experiments you are working on.
 
-Our team reproduced the experiment examining the conditions under which a system reaches the evolutionary stable state when individuals play the Prisoner’s Dilemma game. The experiment’s variables include the type of network being used (WS or BA), the values assigned to the four parameters that influence agent-based behavior, and the updating rule utilized. 
+Our team reproduced the experiment examining the conditions under which a system reaches the evolutionary stable state when individuals play the Prisoner’s Dilemma game. The experiment’s variables include the type of network being used (WS or BA), the values assigned to the four parameters that influence agent-based behavior, and the updating rule utilized.
 
 ## 4) Results from the replication and possibly preliminary results from the extension. Or if you don't have results, sketch what the results from these experiments might look like, possibly using a cartoon of a graphical result.
 
+
+![Figure 1](https://github.com/tlee10333/NashEquilibrium/assets/47285707/c051c0fe-699e-4b0b-a5b5-4e04b4cbc3b0)
