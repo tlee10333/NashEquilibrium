@@ -5,7 +5,43 @@ import seaborn as sns
 import random
 from typing import *
 
-#Functions to create & run WS & NA Networks
+
+# Functions to calculate beta & alpha
+
+def all_nash_pairs(n):
+    """Calculates all the unique nash pairs in a list
+
+    returns:
+        A list containing tuples of unique nash pairs, in the format (node, node)"""
+
+    pairs = []
+    for node in n.prisoner_list:
+
+        for i in n.nash_pair(node):
+            if ((node, i) not in pairs) and ((i, node) not in pairs):
+                pairs.append((node, i))
+    return pairs
+
+
+def alpha(n):
+    """Given a network class, calculate percentage of nash pairs"""
+
+    return 1 - (len(all_nash_pairs(n)) / n.G.size())
+
+
+def beta(n):
+    """Given a network class, calaculate percentage of cooperators in the entire graph"""
+    cooperators = 0
+    for node, prisoner in n.prisoner_list.items():
+        if prisoner.get_strategy() == "C":
+            cooperators += 1
+    return cooperators / 1024
+
+
+
+
+
+# Functions to create & run WS & NA Networks
 def adjacent_edges(nodes, k):
     """
     Yields edges between each node and `halfk` neighbors.
@@ -17,17 +53,15 @@ def adjacent_edges(nodes, k):
 
     halfk = k//2
 
-
-
     n = len(nodes)
     for i, u in enumerate(nodes):
         for j in range(i+1, i+halfk+1):
             v = nodes[j % n]
             yield u, v
 
-            #Successfully make graphs with odd degrees/
-        if k % 2 ==1 and u < n//2:
-          yield u, nodes[(n//2 + u)]
+            # Successfully make graphs with odd degrees/
+        if k % 2 == 1 and u < n//2:
+            yield u, nodes[(n//2 + u)]
 
 
 def make_ring_lattice(n, k):
@@ -50,7 +84,6 @@ def make_ring_lattice(n, k):
 
     G.add_edges_from(adjacent_edges(nodes, k))
 
-
     return G
 
 
@@ -65,13 +98,13 @@ def rewire(G, p):
 
     nodes = set(G)
     for u, v in G.edges():
-      if flip(p):
+        if flip(p):
 
-        #Remove itself & all it's neighbors to find al available choices for a new node to connect to.
-        choices = nodes - {u} - set(G.neighbors(u))
-        new_v = np.random.choice(list(choices))
-        G.remove_edge(u,v)
-        G.add_edge(u, new_v)
+            # Remove itself & all it's neighbors to find al available choices for a new node to connect to.
+            choices = nodes - {u} - set(G.neighbors(u))
+            new_v = np.random.choice(list(choices))
+            G.remove_edge(u, v)
+            G.add_edge(u, new_v)
 
 
 def flip(p):
@@ -82,6 +115,7 @@ def flip(p):
       p: float, probability that coin flips True
     """
     return np.random.random() < p
+
 
 def make_ws_graph(n, k, p):
     """
@@ -101,13 +135,11 @@ def make_ws_graph(n, k, p):
     return ws
 
 
-
-
-#BA Graph Functions
+# BA Graph Functions
 
 
 def make_ba_graph(num_nodes: int, num_edges_per_node: int,
-                          seed: Optional[int] = None):
+                  seed: Optional[int] = None):
     """
     Construct a Barabasi-Albert graph.
 
