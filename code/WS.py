@@ -1,4 +1,4 @@
-from networks import make_ws_graph, make_ba_graph, flip
+from networks import make_ws_graph, make_ba_graph, flip, make_er_graph
 import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np
@@ -34,6 +34,10 @@ class Network():
             self.G = make_ws_graph(n, k, prob)
         elif graph_type == "ba":
             self.G = make_ba_graph(n, k)
+        elif graph_type == "er":
+            self.G = make_er_graph(n, prob)
+        elif graph_type == "nw":
+            self.G = nx.newman_watts_strogatz_graph(n, k, p)
 
         self.prisoner_list = {}
 
