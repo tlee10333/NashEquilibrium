@@ -245,3 +245,4 @@ def make_er_graph(num_nodes, prob_connected):
     G.add_nodes_from(nodes)
     G.add_edges_from(random_pairs(nodes, prob_connected))
     return G
+
