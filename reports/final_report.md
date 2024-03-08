@@ -3,7 +3,7 @@
 Trinity Lee and Daniel Quinteros
 
 ### Abstract
-Nash equilibirum is the concept where the game reaches an optimal outcome and individuals in the game no longer have an incentive to change their strategy. Additionally, a nash pair is a pair of individuals who are are nash equilibrium.
+Nash equilibrium is the concept where the game reaches an optimal outcome and individuals in the game no longer have an incentive to change their strategy. Additionally, a nash pair is a pair of individuals who are in nash equilibrium.
 
 We investigated the local Nash Equilibrium phenomenon in social networks by simulating the Prisoner’s Dilemma Game (PDG). These simulations integrated two types of networks: Watts and Strogatz small-world networks (WS) and Barabasi and Albert scale-free networks (BA).
 
@@ -11,7 +11,7 @@ By tracking the fraction of nash pairs and the proportion of cooperators within 
 
 ### Methodology
 
-In the PDG, there are two strategies an agent could choose: Cooperator or Defector. For the PDG, there are four defined parameters that influence agent-based behavior: T (temptation to defect) for defecting a cooperator, R (reward for mutual cooperation) for cooperating with a cooperator, P (punishment for mutual defection) for defecting a defector, and S (sucker’s payoff) for cooperating with a defector. The parameters follow these rules T > R > P ≥ S and 2R > T + S so that mututal cooperation is the best outcome from the prospective of the two person group.
+In the PDG, there are two strategies an agent could choose: Cooperator or Defector. For the PDG, there are four defined parameters that influence agent-based behavior: T (temptation to defect) for defecting a cooperator, R (reward for mutual cooperation) for cooperating with a cooperator, P (punishment for mutual defection) for defecting a defector, and S (sucker’s payoff) for cooperating with a defector. The parameters follow these rules T > R > P ≥ S and 2R > T + S so that mutual cooperation is the best outcome from the prospective of the two person group.
 
 Furthermore, the agents can then adjust their strategies simultaneously according to a certain updating rule of strategy. They utilized two different approaches, Nowak & May and Santos & Pachecos. [Explain updating rules briefly]
 
@@ -31,7 +31,7 @@ We used Local Nash equilibrium to judge whether a gaming structured population r
 
 ![Original Graphs v2](https://github.com/tlee10333/NashEquilibrium/assets/47285707/37f03b56-7924-4f95-b43b-15e340d3ccde)
 
-**Figure 3: Parameter sweep of a Nowak & May WS Graph** from T = 1.1 to T = 1.6. These are the original graphs corresonding to plot (A) in both Figure 1 and Figure 2. For the sake of viewability, only the first six graphs are shown. The other graphs, from T = 1.7 to T = 2.0 are visibily indistinguisable from T = 1.6, with the large majority of nodes being defectors.
+**Figure 3: Parameter sweep of a Nowak & May WS Graph** from T = 1.1 to T = 1.6. These are the original graphs corresponding to plot (A) in both Figure 1 and Figure 2. For the sake of viewability, only the first six graphs are shown. The other graphs, from T = 1.7 to T = 2.0 are visibly indistinguishable from T = 1.6, with the large majority of nodes being defectors.
 
 ### Interpretation
 
@@ -45,19 +45,25 @@ In contrast, if cooperators cannot survive in the system, α grows over time and
 
 **Figure 4: The comparison between α and β for T = 1.2 of the PDG**
 
+### Replication Accuracy
+![alpha_study_results](https://github.com/tlee10333/NashEquilibrium/assets/47285707/f6ebaca0-d703-4074-9a25-388ee79dab27)
+![beta_study_results](https://github.com/tlee10333/NashEquilibrium/assets/47285707/fb122a6d-c94e-4cb6-8d27-36756e427f7e)
 
-### Extenstion
+### Extension
 
 
 
 ### Causes for Concern
 
-One of the main causes for concern is the failure to perfectly replicate their results. The first caveat of our research is that while they ran their simulations for around 11,000 steps each, with each parameter sweep consisting of multiple repeated simulations just in case, we only did up to 500 timesteps and only did a simulation per parameter sweep. This means that we cannot fully confirm if our networks have reached a true evolutionary stable state as 500 timesteps are barely enough compared to 11,000 timesteps. The reason why we were not able to do 11,000 and take the average of multiple simulations was due to the time complexity of the program. While running 500 steps for 10 different simulations for WS graphs took around 7-9 minutes total, to simply run 10 simulations for 500 steps in BA graphs, it took on average 45-55 minutes. Given that it took that much to run the BA graphs, it did not seem feasible for us to go for 11,000 steps total. 
+One of the main causes for concern is the failure to perfectly replicate their results. The first caveat of our research is that while they ran their simulations for around 11,000 steps each, with each parameter sweep consisting of multiple repeated simulations just in case, we only did up to 500 timesteps and only did a simulation per parameter sweep. This means that we cannot fully confirm if our networks have reached a true evolutionary stable state as 500 timesteps are barely enough compared to 11,000 timesteps. The reason why we were not able to do 11,000 and take the average of multiple simulations was due to the time complexity of the program. While running 500 steps for 10 different simulations for WS graphs took around 7-9 minutes total, to simply run 10 simulations for 500 steps in BA graphs, it took on average 45-55 minutes. Given that it took that much to run the BA graphs, it did not seem feasible for us to go for 11,000 steps total.
 
-We chose 500 timesteps because when we looked at the research paper, it seemed that alpha had stabilized around the 500-1000 timestep mark. Hence, while we chose 500 as a reasonable compromise between runtime and accuracy to the original research conditions, it is important to acknowledge that the findings are not completely identical to the research paper. 
+We chose 500 timesteps because when we looked at the research paper, it seemed that alpha had stabilized around the 500-1000 timestep mark. Hence, while we chose 500 as a reasonable compromise between runtime and accuracy to the original research conditions, it is important to acknowledge that the findings are not completely identical to the research paper.
 
 Furthermore, there were definitely some graphs that did not match picture perfect to the results of the Nash Equilibrium paper. This is also a cause of concern since most of the graphs seem to align with what we expected, but there are some unexplainable behaviors that we noticed.  
 
 ### Annotated Bibliography
 [Local Nash Equilibrium in Social Networks](https://www.nature.com/articles/srep06224.pdf#:~:text=The%20local%20Nash%20equilibrium%20provides%20a%20way%20to,evolutionary%20stable%20state%20for%20the%20Prisoner%E2%80%99s%20dilemma%20game) **Yichao Zhang, M. A. Aziz-Alaoui, Cyrille Bertelle & Jihong Guan**
 This paper investigated two different imperfect information games, The Prisoner’s Dilemma and the Snow Drift/Hawk-Dove/Chicken, and saw how an evolutionary stable state emerged (using local Nash equilibrium to measure) when these two games were placed in a small world (WS) and scale-free (BA) networks.
+
+
+
