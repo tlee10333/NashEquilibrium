@@ -21,27 +21,27 @@ We used Local Nash equilibrium to judge whether a gaming structured population r
 
 ### Results
 
-![Figure 1](https://github.com/tlee10333/NashEquilibrium/assets/47285707/c051c0fe-699e-4b0b-a5b5-4e04b4cbc3b0 "Figure 1")
+![alpha_parameter_sweep](https://github.com/tlee10333/NashEquilibrium/assets/47285707/ca83a2aa-c512-4c7a-a0fa-7bd3ef16a0b2)
 
 **Figure 1: The evolution of α**, representing the fraction of Nash pairs in the connected individuals, for the PDG in social networks. We performed a parameter sweep to investigate the impacts of changing the temptation to defect, ranging from T = 1.1 to T = 2.0, on the system. The remaining parameters of the PDG are fixed at P = S = 0, and R = 0.4.
 
-![Figure 2](https://github.com/tlee10333/NashEquilibrium/assets/47285707/b65cd2cc-dd35-4b79-a014-a63a1388c5b5 "Figure 2")
+![beta_parameter_sweep](https://github.com/tlee10333/NashEquilibrium/assets/47285707/c1683682-0b9d-489f-ab0b-39bf55819bd9)
 
 **Figure 2: The evolution of β**, representing the proportion of cooperators within the entire population of players at a particular round (n) of the game. We performed a parameter sweep to investigate the impacts of changing the temptation to defect, ranging from T = 1.1 to T = 2.0, on the system. The remaining parameters of the PDG are fixed at P = S = 0, and R = 0.4.
 
 ![Original Graphs v2](https://github.com/tlee10333/NashEquilibrium/assets/47285707/37f03b56-7924-4f95-b43b-15e340d3ccde)
 
-**Figure 3: Parameter sweep of a Nowak & May WS Graph** from T = 1.1 to T = 1.6. These are the original graphs corresonding to plot (a) in both Figure 1 and Figure 2. For the sake of viewability, only the first six graphs are shown. The other graphs, from T = 1.7 to T = 2.0 are visibily indistinguisable from T = 1.6, with the large majority of nodes being defectors.
+**Figure 3: Parameter sweep of a Nowak & May WS Graph** from T = 1.1 to T = 1.6. These are the original graphs corresonding to plot (A) in both Figure 1 and Figure 2. For the sake of viewability, only the first six graphs are shown. The other graphs, from T = 1.7 to T = 2.0 are visibily indistinguisable from T = 1.6, with the large majority of nodes being defectors.
 
 ### Interpretation
 
-In Figure 1, the decay of α is prevalent for the temptation to defect T < 1.5 in (a), T < 1.4 in (b), T < 1.9 in (c\) and T < 2.0 in (d). Conversely, α stabilizes at a high value above the mentioned threshold values. In these instances, our simulation findings for β in Figure 2 indicate that cooperators can persist in the corresponding states.
+In Figure 1, the decay of α is prevalent for the temptation to defect T < 1.5 in (A), T < 1.4 in (B), T < 1.9 in (C) and T < 2.0 in (D). Conversely, α stabilizes at a high value above the mentioned threshold values. In these instances, our simulation findings for β in Figure 2 indicate that cooperators can persist in the corresponding states.
 
 None of our models managed to achieve a stabilization point at α = 1. Instead, they stabilized at a minimum level with slight fluctuations. Seeing as cooperators can survive in the system, it implies that cooperative behavior is sustainable and beneficial for individuals within the system. Consequently, one would expect to observe an increasing presence of cooperators within the Nash pairs over time, indicating their successful engagement and influence on other individuals. Having said that, this would mean that the introduction of cooperators possibly disrupts existing equilibria or alters the dynamics of interactions. This disruption or alteration is potentially what leads to a decrease in the fraction of Nash pairs (α) over time in some of the system models.
 
 Eventually, the system reaches an evolutionary stable state, characterized by stability and equilibrium in the strategies adopted by individuals. At this point, α stabilizes at its minimum value, possibly with minor fluctuations. This indicates that the system has settled into a relatively stable configuration where cooperative behavior is sustainable.
 
-In contrast, if cooperators cannot survive in the system, α grows over time and approaches a value of 1, as observed in plot (a) of Figure 1 when T ≥ 1.5. This suggests a dominance of non-cooperative strategies, possibly leading to instability or unfavorable outcomes for individuals within the system. Once again, this is seen in Figure 3, where there is a stark increase in defectors when T ≥ 1.5.
+In contrast, if cooperators cannot survive in the system, α grows over time and approaches a value of 1, as observed in plot (A) of Figure 1 when T ≥ 1.5. This suggests a dominance of non-cooperative strategies, possibly leading to instability or unfavorable outcomes for individuals within the system. Once again, this is seen in Figure 3, where there is a stark increase in defectors when T ≥ 1.5.
 
 **Figure 4: The comparison between α and β for T = 1.2 of the PDG**
 
