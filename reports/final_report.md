@@ -15,7 +15,7 @@ In the PDG, there are two strategies an agent could choose: Cooperator or Defect
 
 For each round, the agents can then adjust their strategies simultaneously according to a certain updating rule of strategy. We utilized two different Darwinian approaches, Nowak & May and Santos & Pachecos. 
 
-###### Nowak and May 
+##### Nowak and May 
 Nowak and May is an updating rule where at the beginning of each round, each player/prisoner will choose the strategy they will use for the current round by looking through all their neighbors and using the last round’s strategy of the neighbor who had the highest payoff. If the player’s payoff is higher than any of its neighbors, it will keep its strategy from the last round. 
 
 ##### Santos and Pachecos
@@ -76,12 +76,14 @@ In general, we see that our simulation does in general align with behavior that 
 
 Upon conducting a more detailed comparison with our simulations in Figure 5, it becomes evident that our results generally align with those of the paper, barring the evolution of α in the Nowak and May BA simulation. These graphs, used by the referenced paper, served to illustrate how, sometimes, models can incorrectly characterize systems as being in Nash equilibrium because they observe two long temporary stable states in the black rectangles. Notably, our results lack these temporary stable states; instead, they tend to approach 1 or decay to a local minimum, a behavior we deemed a non-issue.
 
+### Extension
+
 For our extension, we conducted another PDG simulation, but with two new graphical network types: Erdos Renyi (ER) and Newmann-Watts (NW). We were curious to see how alpha and beta would behave on two different types of network graphs and whether we would find any surprising results. For each new network, we did a parameter sweep exactly the way we did with the BA and WS graphs. 
 
-#### Erdos-Renyi
+##### Erdos-Renyi
 The Erdos-Renyi random graph is a type of network where given a random set of nodes, we then randomly rewire edges based on a set probability and degree. 
 
-### Extension![extension_ER](https://github.com/tlee10333/NashEquilibrium/assets/47285707/9c19d78c-90b9-430c-9247-704fe2acf6c7)
+![extension_ER](https://github.com/tlee10333/NashEquilibrium/assets/47285707/9c19d78c-90b9-430c-9247-704fe2acf6c7)
 
 **Figure 6: The evolution of α and β in a Nowak May ER graph model and a Santos-Pacheco ER graph model**. We performed a parameter sweep to investigate the impacts of changing the temptation to defect, ranging from T = 1.1 to T = 2.0, on the system. The remaining parameters of the PDG are fixed at P = S = 0, and R = 0.4.
 
@@ -89,7 +91,7 @@ The Erdos-Renyi random graph is a type of network where given a random set of no
 
 **Figure 7: Parameter sweep of a Nowak & May ER graph** ranging from T = 1.1 to T = 1.3. These graphs are the original representations corresponding to plots (A) and (C) in Figure 6. To enhance visibility, only the first three graphs are displayed. Subsequent graphs, from T = 1.4 to T = 2.0, exhibit no discernible differences compared to T = 1.3, with the vast majority of nodes identified as defectors. Similarly, the trends observed in the aforementioned figure and described therein are also evident in the Santos and Pacheco ER graphs.
 
-#### Newman-Watts
+##### Newman-Watts
 The Newman-watts graph is a variation of the Watts-Strogatz network graph. Just like a WS model, we start with a ring lattice. However, instead of rewiring existing edges, we add new edges when rewiring. Hence, the degree of each node varies based on probability p. 
 
 ![extension_nw](https://github.com/tlee10333/NashEquilibrium/assets/47285707/00e29d37-cef2-4cb3-ab3e-86c9564dca5d)
