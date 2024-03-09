@@ -96,7 +96,7 @@ The Newman-watts graph is a variation of the Watts-Strogatz network graph. Just 
 
 **Figure 8: The evolution of α and β in a Nowak May NW graph model and a Santos-Pacheco NW graph model**. We performed a parameter sweep to investigate the impacts of changing the temptation to defect, ranging from T = 1.1 to T = 2.0, on the system. The remaining parameters of the PDG are fixed at P = S = 0, and R = 0.4.
 
-![NW_graphs](https://github.com/tlee10333/NashEquilibrium/assets/47285707/49157fdf-6575-4c01-98e0-4f8ded26e763)
+![NW_graphs](https://github.com/tlee10333/NashEquilibrium/assets/47285707/ad62e75f-300f-4851-ae90-5f22fd2e94ee)
 
 **Figure 9: Parameter sweep of a Nowak & May NW graph** ranging from T = 1.1 to T = 1.8. These graphs are the original representations corresponding to plots (A) and (C) in Figure 8. To enhance visibility, only the first eight graphs are displayed. Subsequent graphs, from T = 1.9 to T = 2.0, exhibit no discernible differences compared to T = 1.8, with the vast majority of nodes identified as defectors.
 
