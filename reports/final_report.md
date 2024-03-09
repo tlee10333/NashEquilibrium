@@ -85,7 +85,7 @@ The Erdos-Renyi random graph is a type of network where given a random set of no
 
 **Figure 6: The evolution of α and β in a Nowak May ER graph model and a Santos-Pacheco ER graph model**. We performed a parameter sweep to investigate the impacts of changing the temptation to defect, ranging from T = 1.1 to T = 2.0, on the system. The remaining parameters of the PDG are fixed at P = S = 0, and R = 0.4.
 
-![ER_graphs](https://github.com/tlee10333/NashEquilibrium/assets/47285707/b63793a6-a06b-456a-985d-f01b9abf4cd4)
+![ER_graphs_cropped](https://github.com/tlee10333/NashEquilibrium/assets/47285707/4ca9d429-a18e-46c8-8bce-c4eaaa71794a)
 
 **Figure 7: Parameter sweep of a Nowak & May ER graph** ranging from T = 1.1 to T = 1.3. These graphs are the original representations corresponding to plots (A) and (C) in Figure 6. To enhance visibility, only the first three graphs are displayed. Subsequent graphs, from T = 1.4 to T = 2.0, exhibit no discernible differences compared to T = 1.3, with the vast majority of nodes identified as defectors. Similarly, the trends observed in the aforementioned figure and described therein are also evident in the Santos and Pacheco ER graphs.
 
